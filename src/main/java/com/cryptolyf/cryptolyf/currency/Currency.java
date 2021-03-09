@@ -1,12 +1,13 @@
 package com.cryptolyf.cryptolyf.currency;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//@Entity
+@Entity
+@Table
 public class Currency {
-    public Currency(){}
+    //public Currency(){}
 //    @Id
 //    @SequenceGenerator(
 //            name = "currency_sequence",
@@ -17,6 +18,8 @@ public class Currency {
 //            strategy = GenerationType.SEQUENCE,
 //            generator = "currency_sequence"
 //    )
+    @Id
+    @GeneratedValue
     private Long id ;
     private String name;
     private BigDecimal amount;
@@ -26,6 +29,14 @@ public class Currency {
 
     public Currency(Long id, String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal price) {
         this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.created = created;
+        this.location = location;
+        this.price = price;
+    }
+
+    public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal price) {
         this.name = name;
         this.amount = amount;
         this.created = created;
