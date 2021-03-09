@@ -13,24 +13,9 @@ import java.time.Month;
 import java.util.List;
 
 @SpringBootApplication
-@RestController
 public class CryptolyfApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CryptolyfApplication.class, args);
-	}
-
-	@GetMapping
-	public List<Currency> hello() {
-		return List.of(
-				new Currency(
-						1L,
-						"bitcoin",
-						new BigDecimal("0.00001"),
-						LocalDateTime.of(2021, Month.MARCH, 8, 14, 5, 5),
-						"Hardware Wallet",
-						new BigDecimal("2232.03141")
-				)
-		);
 	}
 }
