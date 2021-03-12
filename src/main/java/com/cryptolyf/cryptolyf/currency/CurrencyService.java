@@ -57,7 +57,8 @@ public class CurrencyService {
         if (currencyOptional.isPresent()) {
             throw new IllegalStateException("currency already exists");
         }
-        //currency.getPrice(bitfinexResource.getPrice());
+        BigDecimal calculatedPrice = currency.getAmount().multiply(bitfinexResource.getOne());
+        currency.setPrice(calculatedPrice);
         currency.setCreated(LocalDateTime.now());
         currencyRepository.save(currency);
     }
