@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 public class Currency {
-    //public Currency(){}
+    public Currency(){}
 //    @Id
 //    @SequenceGenerator(
 //            name = "currency_sequence",
