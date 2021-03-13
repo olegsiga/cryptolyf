@@ -22,8 +22,7 @@ public class CurrencyController {
         return currencyService.getCurrencies();
     }
 
-    //findByName doesn't work yet
-    @GetMapping(value = "/api/currency/{name}")
+    @GetMapping(value = "{name}")
     public Currency findByName(@PathVariable("name") String name){
         return currencyService.findByName(name);
     }

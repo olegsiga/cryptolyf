@@ -32,7 +32,6 @@ public class BitfinexResource {
 
 
     public BigDecimal getOne() {
-        System.out.println("printing getOne " + getPrice().get().toString());
         return new BigDecimal(getPrice().get().toString());
     }
 
