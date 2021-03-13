@@ -25,23 +25,23 @@ public class Currency {
     private BigDecimal amount;
     private LocalDateTime created;
     private String location;
-    private BigDecimal price;
+    private BigDecimal value;
 
-    public Currency(Long id, String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal price) {
+    public Currency(Long id, String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.created = created;
         this.location = location;
-        this.price = price;
+        this.value = value;
     }
 
-    public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal price) {
+    public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
         this.name = name;
         this.amount = amount;
         this.created = created;
         this.location = location;
-        this.price = price;
+        this.value = value;
     }
 
     public Long getId() {
@@ -84,12 +84,12 @@ public class Currency {
         this.location = location;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Currency {
                 ", amount=" + amount +
                 ", doc=" + created +
                 ", location='" + location + '\'' +
-                ", price=" + price +
+                ", price=" + value +
                 '}';
     }
 }

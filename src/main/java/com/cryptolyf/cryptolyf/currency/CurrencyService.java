@@ -66,7 +66,7 @@ public class CurrencyService {
 
         BigDecimal calculatedValue = currency.getAmount()
                 .multiply(bitfinexResource.getOne());
-        currency.setPrice(calculatedValue);
+        currency.setValue(calculatedValue);
         currency.setCreated(LocalDateTime.now());
         currencyRepository.save(currency);
     }
