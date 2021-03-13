@@ -15,6 +15,7 @@ public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
     private final BitfinexResource bitfinexResource;
+
     @Autowired
     public CurrencyService(CurrencyRepository currencyRepository, BitfinexResource bitfinexResource) {
         this.currencyRepository = currencyRepository;
@@ -41,7 +42,11 @@ public class CurrencyService {
 
     //not finished
     @Transactional
-    public void updateCurrency(Long id, String name, BigDecimal amount, String location, BigDecimal price) {
+    public void updateCurrency(Long id,
+                               String name,
+                               BigDecimal amount,
+                               String location,
+                               BigDecimal price) {
         Currency currency = currencyRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "currency " + id + " not found"));
@@ -52,13 +57,16 @@ public class CurrencyService {
     }
 
     public void addCurrency(Currency currency) {
-        Optional<Currency> currencyOptional = Optional.ofNullable(currencyRepository
-                .findByName(currency.getName()));
+        Optional<Currency> currencyOptional = Optional
+                .ofNullable(currencyRepository
+                        .findByName(currency.getName()));
         if (currencyOptional.isPresent()) {
             throw new IllegalStateException("currency already exists");
         }
-        BigDecimal calculatedPrice = currency.getAmount().multiply(bitfinexResource.getOne());
-        currency.setPrice(calculatedPrice);
+
+        BigDecimal calculatedValue = currency.getAmount()
+                .multiply(bitfinexResource.getOne());
+        currency.setPrice(calculatedValue);
         currency.setCreated(LocalDateTime.now());
         currencyRepository.save(currency);
     }
