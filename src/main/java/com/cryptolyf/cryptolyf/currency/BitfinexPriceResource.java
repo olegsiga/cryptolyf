@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/bitfinexPrice")
 public class BitfinexPriceResource {
@@ -16,9 +20,7 @@ public class BitfinexPriceResource {
     @PostMapping
     public void calcFx(@RequestBody BitfinexCalcFxObject bitfinexCalcFxObject) {
         String url = "https://api-pub.bitfinex.com/v2/calc/fx";
-        String value = restTemplate.postForEntity(url, bitfinexCalcFxObject, String.class).getBody();
-        System.out.println(value);
+        BigDecimal[] value = restTemplate.postForEntity(url, bitfinexCalcFxObject, BigDecimal[].class).getBody();
+        //System.out.println(value[0]);
     }
-
-
 }
