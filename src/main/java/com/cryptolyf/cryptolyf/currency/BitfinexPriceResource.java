@@ -18,9 +18,10 @@ public class BitfinexPriceResource {
     private RestTemplate restTemplate;
 
     @PostMapping
-    public void calcFx(@RequestBody BitfinexCalcFxObject bitfinexCalcFxObject) {
+    public BigDecimal calcFx(@RequestBody BitfinexCalcFxObject bitfinexCalcFxObject) {
         String url = "https://api-pub.bitfinex.com/v2/calc/fx";
         BigDecimal[] value = restTemplate.postForEntity(url, bitfinexCalcFxObject, BigDecimal[].class).getBody();
         //System.out.println(value[0]);
+        return value[0];
     }
 }
