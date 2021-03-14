@@ -56,7 +56,7 @@ public class CurrencyService {
         }
     }
 
-    public void addCurrency(Currency currency) {
+    public Currency addCurrency(Currency currency) {
         Optional<Currency> currencyOptional = Optional
                 .ofNullable(currencyRepository
                         .findByName(currency.getName()));
@@ -69,5 +69,6 @@ public class CurrencyService {
         currency.setValue(calculatedValue);
         currency.setCreated(LocalDateTime.now());
         currencyRepository.save(currency);
+        return currency;
     }
 }
