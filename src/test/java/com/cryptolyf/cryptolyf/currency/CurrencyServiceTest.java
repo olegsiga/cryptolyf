@@ -73,7 +73,7 @@ public class CurrencyServiceTest {
     }
 
     @Test
-    public void updateCurrencyLocationSuccessfully(){
+    public void updateCurrencySuccessfully(){
         //given
         Currency currency = new Currency();
         currency.setName("bitcoin2");
@@ -82,7 +82,7 @@ public class CurrencyServiceTest {
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
         //when
-        Currency savedCurrency  = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("0"));
+        Currency savedCurrency  = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("3"));
         System.out.println("printing updateCurrencyLocationSuccessfully() ID: " + savedCurrency.getId());
         //then
         Assert.assertEquals(savedCurrency.getLocation(), "newlocation");
