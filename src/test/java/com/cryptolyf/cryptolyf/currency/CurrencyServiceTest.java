@@ -34,13 +34,13 @@ public class CurrencyServiceTest {
     }
 
     @Test
-    public void findByIdTestReturnSuccess(){
+    public void findByNameTestReturnSuccess(){
         Currency currency = currencyService.findByName("dogecoin");
         Assert.assertNotNull(currency);
     }
 
     @Test
-    public void postCurrencySuccessfully(){
+    public void createCurrencySuccessfully(){
         //given
         Currency currency = new Currency();
         currency.setName("bitcoin2");
@@ -55,7 +55,7 @@ public class CurrencyServiceTest {
     }
 
     @Test
-    public void deleteCurrencySuccessfully(){//given
+    public void deleteCurrencySuccessfully(){
         //given
         Currency currency = new Currency();
         currency.setName("bitcoin3");
@@ -63,11 +63,28 @@ public class CurrencyServiceTest {
         currency.setValue(new BigDecimal("234.234234"));
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
-        Currency savedCurrency2  = currencyService.addCurrency(currency);
+        Currency savedCurrency2 = currencyService.addCurrency(currency);
         System.out.println("printing current currency ID: " + savedCurrency2.getId());
         //when
-        currencyService.deleteCurrency(4l);
+        currencyRepository.deleteById(savedCurrency2.getId());
         //then
+        //Assert.assertNotNull(savedCurrency2.getId()); //passes test
         Assert.assertNull(savedCurrency2.getId());
+    }
+
+    @Test
+    public void updateCurrencyLocationSuccessfully(){
+        //given
+        Currency currency = new Currency();
+        currency.setName("bitcoin2");
+        currency.setCreated(LocalDateTime.now());
+        currency.setValue(new BigDecimal("234.234234"));
+        currency.setLocation("Hardware Wallet");
+        currency.setAmount(new BigDecimal("10"));
+        //when
+        Currency savedCurrency  = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("0"));
+        System.out.println("printing updateCurrencyLocationSuccessfully() ID: " + savedCurrency.getId());
+        //then
+        Assert.assertEquals(savedCurrency.getLocation(), "newlocation");
     }
 }

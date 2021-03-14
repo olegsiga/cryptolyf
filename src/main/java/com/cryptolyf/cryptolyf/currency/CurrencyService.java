@@ -27,6 +27,8 @@ public class CurrencyService {
     }
 
     public Currency findByName(String name) {
+        Currency currency = currencyRepository.findByName(name);
+        currency.setValue(currency.getAmount().multiply(bitfinexResource.getOne()));
         return currencyRepository.findByName(name);
     }
 
@@ -40,20 +42,22 @@ public class CurrencyService {
         }
     }
 
-    //not finished
     @Transactional
-    public void updateCurrency(Long id,
-                               String name,
-                               BigDecimal amount,
-                               String location,
-                               BigDecimal price) {
+    public Currency updateCurrency(Long id,
+                                   String location,
+                                   BigDecimal amount) {
         Currency currency = currencyRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "currency " + id + " not found"));
 
-        if (name.length() > 0 && !Objects.equals(currency.getName(), name)) {
-            currency.setName(name);
+        if (location.length() > 0 && !Objects.equals(currency.getLocation(), location)) {
+            currency.setLocation(location);
         }
+        if (amount.intValue() > 0 && !Objects.equals(currency.getAmount(), amount)) {
+            currency.setAmount(amount);
+            currency.setValue(amount.multiply(bitfinexResource.getOne()));
+        }
+        return currency;
     }
 
     public Currency addCurrency(Currency currency) {

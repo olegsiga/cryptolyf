@@ -40,11 +40,9 @@ public class CurrencyController {
     @PutMapping(path = "{id}")
     public void updateCurrency(
             @PathVariable("id") Long id,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) BigDecimal amount,
             @RequestParam(required = false) String location,
-            @RequestParam(required = false) BigDecimal price) {
-        currencyService.updateCurrency(id, name, amount, location, price);
+            @RequestParam(required = false) BigDecimal amount) {
+        currencyService.updateCurrency(id,location, amount);
     }
 
 }
