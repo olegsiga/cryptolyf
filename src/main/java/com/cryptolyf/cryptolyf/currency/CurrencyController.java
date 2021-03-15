@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/currency")
 public class CurrencyController {
 
     private final CurrencyService currencyService;
@@ -17,22 +17,22 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-    @GetMapping
-    public List<Currency> getCurrencies() {
+    @GetMapping(value = "/currency/list")
+    public List<CurrencyResource> getCurrencies() {
         return currencyService.getCurrencies();
     }
 
-    @GetMapping(value = "{name}")
-    public Currency findByName(@PathVariable("name") String name){
-        return currencyService.findByName(name);
+    @GetMapping(value = "/currency/find/{id}")
+    public Optional<Currency> findById(@PathVariable("id") Long id){
+        return currencyService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(value = "/currency/add")
     public void addCurrency(@RequestBody Currency currency) {
         currencyService.addCurrency(currency);
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "/currency/delete/{id}")
     public void deleteCurrency(@PathVariable("id") Long id) {
         currencyService.deleteCurrency(id);
     }

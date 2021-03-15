@@ -33,11 +33,11 @@ public class CurrencyServiceTest {
         System.out.println(currency.getId());
     }
 
-    @Test
-    public void findByNameTestReturnSuccess(){
-        Currency currency = currencyService.findByName("dogecoin");
-        Assert.assertNotNull(currency);
-    }
+//    @Test
+//    public void findByNameTestReturnSuccess(){
+//        Currency currency = currencyService.findByName("dogecoin");
+//        Assert.assertNotNull(currency);
+//    }
 
     @Test
     public void createCurrencySuccessfully(){

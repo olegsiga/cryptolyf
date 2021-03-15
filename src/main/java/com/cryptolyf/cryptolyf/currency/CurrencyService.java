@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,21 +16,39 @@ public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
     private final BitfinexResource bitfinexResource;
+    private final BitfinexService bitfinexService;
 
     @Autowired
-    public CurrencyService(CurrencyRepository currencyRepository, BitfinexResource bitfinexResource) {
+    public CurrencyService(CurrencyRepository currencyRepository, BitfinexResource bitfinexResource, BitfinexService bitfinexService) {
         this.currencyRepository = currencyRepository;
         this.bitfinexResource = bitfinexResource;
+        this.bitfinexService = bitfinexService;
+    }
+//check this
+
+    public List<CurrencyResource> getCurrencies() {
+        List<CurrencyResource> currencyResources = new ArrayList<>();
+        List<Currency> currencies = currencyRepository.findAll();
+        for (Currency currency : currencies) {
+            currencyResources.add(
+                    new CurrencyResource()
+                    .setId(currency.getId())
+                    .setName(currency.getName())
+                    .setValue(currency.getValue())
+                    .setAmount(currency.getAmount())
+                    .setCreated(currency.getCreated())
+                    .setLocation(currency.getLocation())
+
+                    );
+
+
+        }return currencyResources;
     }
 
-    public List<Currency> getCurrencies() {
-        return currencyRepository.findAll();
-    }
-
-    public Currency findByName(String name) {
-        Currency currency = currencyRepository.findByName(name);
-        currency.setValue(currency.getAmount().multiply(bitfinexResource.getOne()));
-        return currencyRepository.findByName(name);
+    public Optional<Currency> findById(Long id) {
+        Optional<Currency> currency = currencyRepository.findById(id);
+        //currency.setValue(currency.getAmount().multiply(bitfinexResource.getOne()));
+        return currencyRepository.findById(id);
     }
 
     public void deleteCurrency(Long id) {
@@ -61,18 +80,13 @@ public class CurrencyService {
     }
 
     public Currency addCurrency(Currency currency) {
-        Optional<Currency> currencyOptional = Optional
-                .ofNullable(currencyRepository
-                        .findByName(currency.getName()));
-        if (currencyOptional.isPresent()) {
-            throw new IllegalStateException("currency already exists");
+            BigDecimal calculatedValue = currency.getAmount()
+                    .multiply(bitfinexService.getLastPrice(currency.getName(), "EUR"));
+            currency.setValue(calculatedValue);
+            currency.setCreated(LocalDateTime.now());
+            currencyRepository.save(currency);
+            System.out.println("Your currency " + currency.getName() + " was added, current value is: " + calculatedValue);
+            return currency;
         }
 
-        BigDecimal calculatedValue = currency.getAmount()
-                .multiply(bitfinexResource.getOne());
-        currency.setValue(calculatedValue);
-        currency.setCreated(LocalDateTime.now());
-        currencyRepository.save(currency);
-        return currency;
-    }
 }
