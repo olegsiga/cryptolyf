@@ -1,5 +1,10 @@
-package com.cryptolyf.cryptolyf.currency;
+package com.cryptolyf.cryptolyf.currency.service;
 
+import com.cryptolyf.cryptolyf.currency.BitfinexResource;
+import com.cryptolyf.cryptolyf.currency.BitfinexService;
+import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
+import com.cryptolyf.cryptolyf.currency.model.Currency;
+import com.cryptolyf.cryptolyf.currency.model.CurrencyResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

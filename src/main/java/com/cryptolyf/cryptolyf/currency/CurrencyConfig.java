@@ -1,13 +1,13 @@
 package com.cryptolyf.cryptolyf.currency;
 
+import com.cryptolyf.cryptolyf.currency.model.Currency;
+import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import static java.time.Month.MARCH;
 
 @Configuration
 public class CurrencyConfig {

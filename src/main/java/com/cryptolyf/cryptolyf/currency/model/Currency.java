@@ -1,4 +1,4 @@
-package com.cryptolyf.cryptolyf.currency;
+package com.cryptolyf.cryptolyf.currency.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

@@ -1,5 +1,8 @@
 package com.cryptolyf.cryptolyf.currency;
 
+import com.cryptolyf.cryptolyf.currency.model.Currency;
+import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
+import com.cryptolyf.cryptolyf.currency.service.CurrencyService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

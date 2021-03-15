@@ -1,5 +1,8 @@
-package com.cryptolyf.cryptolyf.currency;
+package com.cryptolyf.cryptolyf.currency.controller;
 
+import com.cryptolyf.cryptolyf.currency.model.Currency;
+import com.cryptolyf.cryptolyf.currency.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.currency.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +40,7 @@ public class CurrencyController {
         currencyService.deleteCurrency(id);
     }
 
-    @PutMapping(path = "{id}")
+    @PutMapping(path = "/currency/update/{id}")
     public void updateCurrency(
             @PathVariable("id") Long id,
             @RequestParam(required = false) String location,
