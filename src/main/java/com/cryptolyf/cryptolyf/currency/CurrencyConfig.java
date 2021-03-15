@@ -17,7 +17,7 @@ public class CurrencyConfig {
             CurrencyRepository repository) {
         return args -> {
             Currency bitcoin = new Currency(
-                    "bitcoin",
+                    "BTC",
                     new BigDecimal("0.1337"),
                     LocalDateTime.now(),
                     "Hardware Wallet",

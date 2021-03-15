@@ -1,7 +1,5 @@
 package com.cryptolyf.cryptolyf.currency.service;
 
-import com.cryptolyf.cryptolyf.currency.BitfinexResource;
-import com.cryptolyf.cryptolyf.currency.BitfinexService;
 import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
 import com.cryptolyf.cryptolyf.currency.model.Currency;
 import com.cryptolyf.cryptolyf.currency.model.CurrencyResource;
@@ -20,13 +18,11 @@ import java.util.Optional;
 public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
-    private final BitfinexResource bitfinexResource;
     private final BitfinexService bitfinexService;
 
     @Autowired
-    public CurrencyService(CurrencyRepository currencyRepository, BitfinexResource bitfinexResource, BitfinexService bitfinexService) {
+    public CurrencyService(CurrencyRepository currencyRepository, BitfinexService bitfinexService) {
         this.currencyRepository = currencyRepository;
-        this.bitfinexResource = bitfinexResource;
         this.bitfinexService = bitfinexService;
     }
 //check this
@@ -79,7 +75,11 @@ public class CurrencyService {
         }
         if (amount.intValue() > 0 && !Objects.equals(currency.getAmount(), amount)) {
             currency.setAmount(amount);
-            currency.setValue(amount.multiply(bitfinexResource.getOne()));
+            BigDecimal calculatedValue = currency.getAmount()
+                    .multiply(bitfinexService.getLastPrice(currency.getName(), "EUR"));
+            currency.setValue(calculatedValue);
+        } else {
+            currency.setValue(currency.getValue());
         }
         return currency;
     }
