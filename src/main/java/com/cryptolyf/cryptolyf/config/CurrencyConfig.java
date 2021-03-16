@@ -14,7 +14,7 @@ public class CurrencyConfig {
 
     @Bean
     CommandLineRunner commandLineRunner(
-            CurrencyRepository repository) {
+            CurrencyRepository currencyRepository) {
         return args -> {
             Currency bitcoin = new Currency(
                     "BTC",
@@ -23,7 +23,7 @@ public class CurrencyConfig {
                     "Hardware Wallet",
                     new BigDecimal("420.139451035")
             );
-            repository.save(bitcoin);
+            currencyRepository.save(bitcoin);
         };
     }
 

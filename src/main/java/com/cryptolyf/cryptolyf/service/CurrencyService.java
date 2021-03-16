@@ -25,7 +25,6 @@ public class CurrencyService {
         this.currencyRepository = currencyRepository;
         this.bitfinexService = bitfinexService;
     }
-//check this
 
     public List<CurrencyResource> getCurrencies() {
         List<CurrencyResource> currencyResources = new ArrayList<>();
@@ -85,7 +84,7 @@ public class CurrencyService {
             currency.setLocation(currency.getLocation());
         }
 
-        if (amount != null && amount.intValue() > 0 && !Objects.equals(currency.getAmount(), amount)) {
+        if (amount != null && amount.intValue() >= 0 && !Objects.equals(currency.getAmount(), amount)) {
             currency.setAmount(amount);
             BigDecimal calculatedValue = currency.getAmount()
                     .multiply(bitfinexService.getLastPrice(currency.getName()));
