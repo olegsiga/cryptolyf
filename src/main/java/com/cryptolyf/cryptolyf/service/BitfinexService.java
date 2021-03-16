@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Service
 public class BitfinexService {
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public BitfinexService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
