@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class CurrencyController {
@@ -26,7 +25,7 @@ public class CurrencyController {
     }
 
     @GetMapping(value = "/currency/findOne/{id}")
-    public Optional<Currency> findById(@PathVariable("id") Long id){
+    public CurrencyResource findById(@PathVariable("id") Long id) {
         return currencyService.findById(id);
     }
 
@@ -45,7 +44,7 @@ public class CurrencyController {
             @PathVariable("id") Long id,
             @RequestParam(required = false) String location,
             @RequestParam(required = false) BigDecimal amount) {
-        currencyService.updateCurrency(id,location, amount);
+        currencyService.updateCurrency(id, location, amount);
     }
 
 }

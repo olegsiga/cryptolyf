@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class CurrencyResource {
 
-    private Long id ;
+    private Long id;
     private String name;
     private BigDecimal amount;
     private LocalDateTime created;

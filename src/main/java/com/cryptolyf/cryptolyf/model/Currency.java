@@ -1,22 +1,26 @@
 package com.cryptolyf.cryptolyf.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table
 public class Currency {
-    public Currency(){}
-
     @Id
     @GeneratedValue
-    private Long id ;
+    private Long id;
     private String name;
     private BigDecimal amount;
     private LocalDateTime created;
     private String location;
     private BigDecimal value;
+
+    public Currency() {
+    }
 
     public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
         this.name = name;

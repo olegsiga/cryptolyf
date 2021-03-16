@@ -22,7 +22,7 @@ public class CurrencyConfig {
                     LocalDateTime.now(),
                     "Hardware Wallet",
                     new BigDecimal("420.139451035")
-                    );
+            );
             repository.save(bitcoin);
         };
     }

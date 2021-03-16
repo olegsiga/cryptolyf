@@ -27,13 +27,12 @@ public class CurrencyServiceTest {
     @Before
     public void setup() {
         Currency currency = new Currency();
-        currency.setName("dogecoin");
+        currency.setName("LTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
         currencyRepository.save(currency);
-        System.out.println(currency.getId());
     }
 
 //    @Test
@@ -43,31 +42,30 @@ public class CurrencyServiceTest {
 //    }
 
     @Test
-    public void createCurrencySuccessfully(){
+    public void createCurrencySuccessfully() {
         //given
         Currency currency = new Currency();
-        currency.setName("bitcoin2");
+        currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
         //when
-        Currency savedCurrency  = currencyService.addCurrency(currency);
+        Currency savedCurrency = currencyService.addCurrency(currency);
         //then
         Assert.assertNotNull(savedCurrency.getId());
     }
 
     @Test
-    public void deleteCurrencySuccessfully(){
+    public void deleteCurrencySuccessfully() {
         //given
         Currency currency = new Currency();
-        currency.setName("bitcoin3");
+        currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
         Currency savedCurrency2 = currencyService.addCurrency(currency);
-        System.out.println("printing current currency ID: " + savedCurrency2.getId());
         //when
         currencyRepository.deleteById(savedCurrency2.getId());
         //then
@@ -76,16 +74,16 @@ public class CurrencyServiceTest {
     }
 
     @Test
-    public void updateCurrencySuccessfully(){
+    public void updateCurrencySuccessfully() {
         //given
         Currency currency = new Currency();
-        currency.setName("bitcoin2");
+        currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
         currency.setLocation("Hardware Wallet");
         currency.setAmount(new BigDecimal("10"));
         //when
-        Currency savedCurrency  = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("3"));
+        Currency savedCurrency = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("3"));
         System.out.println("printing updateCurrencyLocationSuccessfully() ID: " + savedCurrency.getId());
         //then
         Assert.assertEquals(savedCurrency.getLocation(), "newlocation");

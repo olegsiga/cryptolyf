@@ -45,12 +45,20 @@ public class CurrencyService {
         return currencyResources;
     }
 
-    public Optional<Currency> findById(Long id) {
+    public CurrencyResource findById(Long id) {
         boolean exists = currencyRepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("the id: " + id + " doesn't exist");
         } else {
-            return currencyRepository.findById(id);
+            Optional<Currency> currency;
+            currency = currencyRepository.findById(id);
+            return new CurrencyResource()
+                    .setId(currency.get().getId())
+                    .setName(currency.get().getName())
+                    .setValue(currency.get().getValue())
+                    .setAmount(currency.get().getAmount())
+                    .setCreated(currency.get().getCreated())
+                    .setLocation(currency.get().getLocation());
         }
     }
 
