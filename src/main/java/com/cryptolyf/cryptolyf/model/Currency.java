@@ -8,16 +8,7 @@ import java.time.LocalDateTime;
 @Table
 public class Currency {
     public Currency(){}
-//    @Id
-//    @SequenceGenerator(
-//            name = "currency_sequence",
-//            sequenceName = "currency_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "currency_sequence"
-//    )
+
     @Id
     @GeneratedValue
     private Long id ;
@@ -26,15 +17,6 @@ public class Currency {
     private LocalDateTime created;
     private String location;
     private BigDecimal value;
-
-    public Currency(Long id, String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
-        this.id = id;
-        this.name = name;
-        this.amount = amount;
-        this.created = created;
-        this.location = location;
-        this.value = value;
-    }
 
     public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
         this.name = name;

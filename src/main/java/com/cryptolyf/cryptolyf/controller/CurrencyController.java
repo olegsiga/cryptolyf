@@ -20,12 +20,12 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-    @GetMapping(value = "/currency/list")
+    @GetMapping(value = "/currency/findAll")
     public List<CurrencyResource> getCurrencies() {
         return currencyService.getCurrencies();
     }
 
-    @GetMapping(value = "/currency/find/{id}")
+    @GetMapping(value = "/currency/findOne/{id}")
     public Optional<Currency> findById(@PathVariable("id") Long id){
         return currencyService.findById(id);
     }

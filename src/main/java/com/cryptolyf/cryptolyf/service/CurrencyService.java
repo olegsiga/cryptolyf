@@ -1,8 +1,8 @@
 package com.cryptolyf.cryptolyf.service;
 
-import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
 import com.cryptolyf.cryptolyf.model.Currency;
 import com.cryptolyf.cryptolyf.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,23 +33,25 @@ public class CurrencyService {
         for (Currency currency : currencies) {
             currencyResources.add(
                     new CurrencyResource()
-                    .setId(currency.getId())
-                    .setName(currency.getName())
-                    .setValue(currency.getValue())
-                    .setAmount(currency.getAmount())
-                    .setCreated(currency.getCreated())
-                    .setLocation(currency.getLocation())
+                            .setId(currency.getId())
+                            .setName(currency.getName())
+                            .setValue(currency.getValue())
+                            .setAmount(currency.getAmount())
+                            .setCreated(currency.getCreated())
+                            .setLocation(currency.getLocation())
 
-                    );
-
-
-        }return currencyResources;
+            );
+        }
+        return currencyResources;
     }
 
     public Optional<Currency> findById(Long id) {
-        Optional<Currency> currency = currencyRepository.findById(id);
-        //currency.setValue(currency.getAmount().multiply(bitfinexResource.getOne()));
-        return currencyRepository.findById(id);
+        boolean exists = currencyRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("the id: " + id + " doesn't exist");
+        } else {
+            return currencyRepository.findById(id);
+        }
     }
 
     public void deleteCurrency(Long id) {
@@ -58,7 +60,6 @@ public class CurrencyService {
             throw new IllegalStateException("the id: " + id + " doesn't exist");
         } else {
             currencyRepository.deleteById(id);
-            System.out.println("deleted");
         }
     }
 
@@ -73,10 +74,11 @@ public class CurrencyService {
         if (location.length() > 0 && !Objects.equals(currency.getLocation(), location)) {
             currency.setLocation(location);
         }
+
         if (amount.intValue() > 0 && !Objects.equals(currency.getAmount(), amount)) {
             currency.setAmount(amount);
             BigDecimal calculatedValue = currency.getAmount()
-                    .multiply(bitfinexService.getLastPrice(currency.getName(), "EUR"));
+                    .multiply(bitfinexService.getLastPrice(currency.getName()));
             currency.setValue(calculatedValue);
         } else {
             currency.setValue(currency.getValue());
@@ -85,13 +87,11 @@ public class CurrencyService {
     }
 
     public Currency addCurrency(Currency currency) {
-            BigDecimal calculatedValue = currency.getAmount()
-                    .multiply(bitfinexService.getLastPrice(currency.getName(), "EUR"));
-            currency.setValue(calculatedValue);
-            currency.setCreated(LocalDateTime.now());
-            currencyRepository.save(currency);
-            System.out.println("Your currency " + currency.getName() + " was added, current value is: " + calculatedValue);
-            return currency;
-        }
-
+        BigDecimal calculatedValue = currency.getAmount()
+                .multiply(bitfinexService.getLastPrice(currency.getName()));
+        currency.setValue(calculatedValue);
+        currency.setCreated(LocalDateTime.now());
+        currencyRepository.save(currency);
+        return currency;
+    }
 }
