@@ -1,7 +1,7 @@
-package com.cryptolyf.cryptolyf.currency.config;
+package com.cryptolyf.cryptolyf.config;
 
-import com.cryptolyf.cryptolyf.currency.model.Currency;
-import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
+import com.cryptolyf.cryptolyf.model.Currency;
+import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

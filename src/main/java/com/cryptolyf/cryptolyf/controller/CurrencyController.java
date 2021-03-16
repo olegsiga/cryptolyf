@@ -1,8 +1,8 @@
-package com.cryptolyf.cryptolyf.currency.controller;
+package com.cryptolyf.cryptolyf.controller;
 
-import com.cryptolyf.cryptolyf.currency.model.Currency;
-import com.cryptolyf.cryptolyf.currency.model.CurrencyResource;
-import com.cryptolyf.cryptolyf.currency.service.CurrencyService;
+import com.cryptolyf.cryptolyf.model.Currency;
+import com.cryptolyf.cryptolyf.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

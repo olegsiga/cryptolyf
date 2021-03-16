@@ -1,4 +1,4 @@
-package com.cryptolyf.cryptolyf.currency.service;
+package com.cryptolyf.cryptolyf.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

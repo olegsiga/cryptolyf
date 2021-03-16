@@ -1,4 +1,4 @@
-package com.cryptolyf.cryptolyf.currency.model;
+package com.cryptolyf.cryptolyf.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

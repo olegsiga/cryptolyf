@@ -1,8 +1,8 @@
-package com.cryptolyf.cryptolyf.currency.scheduledTasks;
+package com.cryptolyf.cryptolyf.scheduledTasks;
 
-import com.cryptolyf.cryptolyf.currency.model.Currency;
-import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
-import com.cryptolyf.cryptolyf.currency.service.BitfinexService;
+import com.cryptolyf.cryptolyf.model.Currency;
+import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
+import com.cryptolyf.cryptolyf.service.BitfinexService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

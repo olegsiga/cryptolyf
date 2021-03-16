@@ -1,6 +1,6 @@
-package com.cryptolyf.cryptolyf.currency.repository;
+package com.cryptolyf.cryptolyf.repository;
 
-import com.cryptolyf.cryptolyf.currency.model.Currency;
+import com.cryptolyf.cryptolyf.model.Currency;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
-package com.cryptolyf.cryptolyf.currency.service;
+package com.cryptolyf.cryptolyf.service;
 
-import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
-import com.cryptolyf.cryptolyf.currency.model.Currency;
-import com.cryptolyf.cryptolyf.currency.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
+import com.cryptolyf.cryptolyf.model.Currency;
+import com.cryptolyf.cryptolyf.model.CurrencyResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
