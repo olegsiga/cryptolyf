@@ -1,4 +1,4 @@
-package com.cryptolyf.cryptolyf.currency;
+package com.cryptolyf.cryptolyf.currency.config;
 
 import com.cryptolyf.cryptolyf.currency.model.Currency;
 import com.cryptolyf.cryptolyf.currency.repository.CurrencyRepository;
