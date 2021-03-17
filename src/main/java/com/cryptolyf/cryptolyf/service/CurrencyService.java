@@ -92,6 +92,7 @@ public class CurrencyService {
         } else {
             currency.setValue(currency.getValue());
         }
+        currencyRepository.save(currency);
         return currency;
     }
 
