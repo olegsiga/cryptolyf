@@ -35,12 +35,6 @@ public class CurrencyServiceTest {
         currencyRepository.save(currency);
     }
 
-//    @Test
-//    public void findByNameTestReturnSuccess(){
-//        Currency currency = currencyService.findByName("dogecoin");
-//        Assert.assertNotNull(currency);
-//    }
-
     @Test
     public void createCurrencySuccessfully() {
         //given
@@ -69,7 +63,6 @@ public class CurrencyServiceTest {
         //when
         currencyRepository.deleteById(savedCurrency2.getId());
         //then
-        //Assert.assertNotNull(savedCurrency2.getId()); //passes test
         Assert.assertNull(savedCurrency2.getId());
     }
 
