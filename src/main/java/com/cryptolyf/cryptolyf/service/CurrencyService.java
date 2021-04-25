@@ -21,7 +21,8 @@ public class CurrencyService {
     private final BitfinexService bitfinexService;
 
     @Autowired
-    public CurrencyService(CurrencyRepository currencyRepository, BitfinexService bitfinexService) {
+    public CurrencyService(CurrencyRepository currencyRepository,
+                           BitfinexService bitfinexService) {
         this.currencyRepository = currencyRepository;
         this.bitfinexService = bitfinexService;
     }
@@ -78,13 +79,15 @@ public class CurrencyService {
                 .orElseThrow(() -> new IllegalStateException(
                         "currency " + id + " not found"));
 
-        if (location != null && location.length() > 0 && !Objects.equals(currency.getLocation(), location)) {
+        if (location != null && location.length() > 0
+                && !Objects.equals(currency.getLocation(), location)) {
             currency.setLocation(location);
         } else {
             currency.setLocation(currency.getLocation());
         }
 
-        if (amount != null && amount.intValue() >= 0 && !Objects.equals(currency.getAmount(), amount)) {
+        if (amount != null && amount.intValue() >= 0
+                && !Objects.equals(currency.getAmount(), amount)) {
             currency.setAmount(amount);
             BigDecimal calculatedValue = currency.getAmount()
                     .multiply(bitfinexService.getLastPrice(currency.getName()));

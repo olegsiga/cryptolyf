@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -63,7 +64,8 @@ public class CurrencyServiceTest {
         //when
         currencyRepository.deleteById(savedCurrency2.getId());
         //then
-        Assert.assertNull(savedCurrency2.getId());
+        final Optional<Currency> deletedEntry = currencyRepository.findById(savedCurrency2.getId());
+        Assert.assertTrue(deletedEntry.isEmpty());
     }
 
     @Test
