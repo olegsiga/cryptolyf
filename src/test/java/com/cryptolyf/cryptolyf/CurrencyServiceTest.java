@@ -1,5 +1,6 @@
 package com.cryptolyf.cryptolyf;
 
+import com.cryptolyf.cryptolyf.exceptions.CurrencyNotFoundException;
 import com.cryptolyf.cryptolyf.model.Currency;
 import com.cryptolyf.cryptolyf.model.WalletType;
 import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
@@ -70,7 +71,7 @@ public class CurrencyServiceTest {
     }
 
     @Test
-    public void updateCurrencySuccessfully() {
+    public void updateCurrencySuccessfully() throws CurrencyNotFoundException {
         //given
         Currency currency = new Currency();
         currency.setName("BTC");
@@ -82,6 +83,6 @@ public class CurrencyServiceTest {
         Currency savedCurrency = currencyService.updateCurrency(1l, WalletType.DESKTOP, new BigDecimal("3"));
         System.out.println("printing updateCurrencyLocationSuccessfully() ID: " + savedCurrency.getId());
         //then
-        Assert.assertEquals(savedCurrency.getLocation(), "newlocation");
+        Assert.assertEquals(savedCurrency.getLocation(), WalletType.HARDWARE);
     }
 }

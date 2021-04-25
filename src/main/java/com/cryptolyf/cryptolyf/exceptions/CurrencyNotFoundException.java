@@ -1,6 +1,6 @@
 package com.cryptolyf.cryptolyf.exceptions;
 
-public class CurrencyNotFoundException extends Throwable{
+public class CurrencyNotFoundException extends Exception{
     public CurrencyNotFoundException(String message) {
         super(message);
     }

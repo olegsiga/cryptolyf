@@ -64,10 +64,10 @@ public class CurrencyService {
         }
     }
 
-    public void deleteCurrency(Long id) {
+    public void deleteCurrency(Long id) throws CurrencyNotFoundException {
         boolean exists = currencyRepository.existsById(id);
         if (!exists) {
-            throw new IllegalStateException("the id: " + id + " doesn't exist");
+            throw new CurrencyNotFoundException("the id: " + id + " doesn't exist");
         } else {
             currencyRepository.deleteById(id);
         }
@@ -76,10 +76,9 @@ public class CurrencyService {
     @Transactional
     public Currency updateCurrency(Long id,
                                    WalletType location,
-                                   BigDecimal amount) {
+                                   BigDecimal amount) throws CurrencyNotFoundException {
         Currency currency = currencyRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException(
-                        "currency " + id + " not found"));
+                .orElseThrow(() -> new CurrencyNotFoundException("the id: " + id + " not found"));
 
         if (location != null && location.toString().length() > 0
                 && !Objects.equals(currency.getLocation(), location)) {

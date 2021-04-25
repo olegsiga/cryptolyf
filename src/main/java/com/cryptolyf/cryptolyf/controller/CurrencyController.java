@@ -37,7 +37,7 @@ public class CurrencyController {
     }
 
     @DeleteMapping(path = "/currency/delete/{id}")
-    public void deleteCurrency(@PathVariable("id") Long id) {
+    public void deleteCurrency(@PathVariable("id") Long id) throws CurrencyNotFoundException {
         currencyService.deleteCurrency(id);
     }
 
@@ -45,7 +45,7 @@ public class CurrencyController {
     public void updateCurrency(
             @PathVariable("id") Long id,
             @RequestParam(required = false) WalletType location,
-            @RequestParam(required = false) BigDecimal amount) {
+            @RequestParam(required = false) BigDecimal amount) throws CurrencyNotFoundException {
         currencyService.updateCurrency(id, location, amount);
     }
 
