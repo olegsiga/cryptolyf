@@ -16,13 +16,13 @@ public class Currency {
     private String name;
     private BigDecimal amount;
     private LocalDateTime created;
-    private String location;
+    private WalletType location;
     private BigDecimal value;
 
     public Currency() {
     }
 
-    public Currency(String name, BigDecimal amount, LocalDateTime created, String location, BigDecimal value) {
+    public Currency(String name, BigDecimal amount, LocalDateTime created, WalletType location, BigDecimal value) {
         this.name = name;
         this.amount = amount;
         this.created = created;
@@ -62,11 +62,11 @@ public class Currency {
         this.created = created;
     }
 
-    public String getLocation() {
+    public WalletType getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(WalletType location) {
         this.location = location;
     }
 

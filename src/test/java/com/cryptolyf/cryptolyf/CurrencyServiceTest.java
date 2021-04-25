@@ -1,6 +1,7 @@
 package com.cryptolyf.cryptolyf;
 
 import com.cryptolyf.cryptolyf.model.Currency;
+import com.cryptolyf.cryptolyf.model.WalletType;
 import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
 import com.cryptolyf.cryptolyf.service.CurrencyService;
 import org.junit.Assert;
@@ -31,7 +32,7 @@ public class CurrencyServiceTest {
         currency.setName("LTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
-        currency.setLocation("Hardware Wallet");
+        currency.setLocation(WalletType.HARDWARE);
         currency.setAmount(new BigDecimal("10"));
         currencyRepository.save(currency);
     }
@@ -43,7 +44,7 @@ public class CurrencyServiceTest {
         currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
-        currency.setLocation("Hardware Wallet");
+        currency.setLocation(WalletType.HARDWARE);
         currency.setAmount(new BigDecimal("10"));
         //when
         Currency savedCurrency = currencyService.addCurrency(currency);
@@ -58,7 +59,7 @@ public class CurrencyServiceTest {
         currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
-        currency.setLocation("Hardware Wallet");
+        currency.setLocation(WalletType.HARDWARE);
         currency.setAmount(new BigDecimal("10"));
         Currency savedCurrency2 = currencyService.addCurrency(currency);
         //when
@@ -75,10 +76,10 @@ public class CurrencyServiceTest {
         currency.setName("BTC");
         currency.setCreated(LocalDateTime.now());
         currency.setValue(new BigDecimal("234.234234"));
-        currency.setLocation("Hardware Wallet");
+        currency.setLocation(WalletType.HARDWARE);
         currency.setAmount(new BigDecimal("10"));
         //when
-        Currency savedCurrency = currencyService.updateCurrency(1l, "newlocation", new BigDecimal("3"));
+        Currency savedCurrency = currencyService.updateCurrency(1l, WalletType.DESKTOP, new BigDecimal("3"));
         System.out.println("printing updateCurrencyLocationSuccessfully() ID: " + savedCurrency.getId());
         //then
         Assert.assertEquals(savedCurrency.getLocation(), "newlocation");

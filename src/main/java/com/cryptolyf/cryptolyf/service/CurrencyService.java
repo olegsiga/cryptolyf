@@ -1,7 +1,9 @@
 package com.cryptolyf.cryptolyf.service;
 
+import com.cryptolyf.cryptolyf.exceptions.CurrencyNotFoundException;
 import com.cryptolyf.cryptolyf.model.Currency;
 import com.cryptolyf.cryptolyf.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.model.WalletType;
 import com.cryptolyf.cryptolyf.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +47,10 @@ public class CurrencyService {
         return currencyResources;
     }
 
-    public CurrencyResource findById(Long id) {
+    public CurrencyResource findById(Long id) throws CurrencyNotFoundException {
         boolean exists = currencyRepository.existsById(id);
         if (!exists) {
-            throw new IllegalStateException("the id: " + id + " doesn't exist");
+            throw new CurrencyNotFoundException("the id: " + id + " doesn't exist");
         } else {
             Optional<Currency> currency;
             currency = currencyRepository.findById(id);
@@ -73,13 +75,13 @@ public class CurrencyService {
 
     @Transactional
     public Currency updateCurrency(Long id,
-                                   String location,
+                                   WalletType location,
                                    BigDecimal amount) {
         Currency currency = currencyRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "currency " + id + " not found"));
 
-        if (location != null && location.length() > 0
+        if (location != null && location.toString().length() > 0
                 && !Objects.equals(currency.getLocation(), location)) {
             currency.setLocation(location);
         } else {

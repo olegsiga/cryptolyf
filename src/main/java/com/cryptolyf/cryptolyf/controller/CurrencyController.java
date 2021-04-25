@@ -1,7 +1,9 @@
 package com.cryptolyf.cryptolyf.controller;
 
+import com.cryptolyf.cryptolyf.exceptions.CurrencyNotFoundException;
 import com.cryptolyf.cryptolyf.model.Currency;
 import com.cryptolyf.cryptolyf.model.CurrencyResource;
+import com.cryptolyf.cryptolyf.model.WalletType;
 import com.cryptolyf.cryptolyf.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class CurrencyController {
     }
 
     @GetMapping(value = "/currency/findOne/{id}")
-    public CurrencyResource findById(@PathVariable("id") Long id) {
+    public CurrencyResource findById(@PathVariable("id") Long id) throws CurrencyNotFoundException {
         return currencyService.findById(id);
     }
 
@@ -42,7 +44,7 @@ public class CurrencyController {
     @PutMapping(path = "/currency/update/{id}")
     public void updateCurrency(
             @PathVariable("id") Long id,
-            @RequestParam(required = false) String location,
+            @RequestParam(required = false) WalletType location,
             @RequestParam(required = false) BigDecimal amount) {
         currencyService.updateCurrency(id, location, amount);
     }

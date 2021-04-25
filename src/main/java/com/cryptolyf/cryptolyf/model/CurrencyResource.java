@@ -9,7 +9,7 @@ public class CurrencyResource {
     private String name;
     private BigDecimal amount;
     private LocalDateTime created;
-    private String location;
+    private WalletType location;
     private BigDecimal value;
 
     public Long getId() {
@@ -48,11 +48,11 @@ public class CurrencyResource {
         return this;
     }
 
-    public String getLocation() {
+    public WalletType getLocation() {
         return location;
     }
 
-    public CurrencyResource setLocation(String location) {
+    public CurrencyResource setLocation(WalletType location) {
         this.location = location;
         return this;
     }
