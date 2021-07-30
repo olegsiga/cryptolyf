@@ -105,6 +105,7 @@ public class CurrencyService {
                 .multiply(bitfinexService.getLastPrice(currency.getName()));
         currency.setValue(calculatedValue);
         currency.setCreated(LocalDateTime.now());
+        currency.setLocation(currency.getLocation());
         currencyRepository.save(currency);
         return currency;
     }
